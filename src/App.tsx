@@ -194,9 +194,11 @@ export default function App() {
         </GlassSurface>
       </nav>
       <section className="cover" id="home" hidden={activeSection !== "home"} onPointerDown={retryPlayback}>
-      <video ref={videoRef} className="cover__video" autoPlay muted loop playsInline preload="auto" aria-label="作品集封面动态背景">
-        <source src="assets/cover.mp4" type="video/mp4" />
-      </video>
+      {activeSection === "home" && (
+        <video ref={videoRef} className="cover__video" autoPlay muted loop playsInline preload="metadata" aria-label="作品集封面动态背景">
+          <source src="assets/cover.mp4" type="video/mp4" />
+        </video>
+      )}
       <div className="cover__shade" aria-hidden="true" />
       <section className="cover__art" aria-label="王杰慧 UI/UX 设计作品集 2026">
         <img className="cover__title" src="assets/title.png" alt="设计作品集，向新而行！" />
@@ -227,11 +229,11 @@ export default function App() {
 
       <section className="about about--image" id="about" hidden={activeSection !== "about"} aria-label="自我介绍">
         <div className={`about__canvas ${portraitActive ? "is-active" : ""}`}>
-          <img className="about__page-image" src="assets/about-background-new.jpg" alt="王杰慧的自我介绍、教育经历与实习经历" />
-          <img className="about__person-layer about__person-layer--default" src="assets/about-person-default.jpg" alt="" />
-          <img className="about__person-layer about__person-layer--hover" src="assets/about-person-hover.jpg" alt="" />
-          <img className="about__click-tip" src="assets/about-click-tip.png" alt="点击我，和我打个招呼吧" />
-          <img className="about__vx-tag" src="assets/vx.png" alt="" aria-hidden="true" />
+          <img className="about__page-image" src="assets/about-background-new.jpg" alt="王杰慧的自我介绍、教育经历与实习经历" loading="lazy" />
+          <img className="about__person-layer about__person-layer--default" src="assets/about-person-default.jpg" alt="" loading="lazy" />
+          <img className="about__person-layer about__person-layer--hover" src="assets/about-person-hover.jpg" alt="" loading="lazy" />
+          <img className="about__click-tip" src="assets/about-click-tip.png" alt="点击我，和我打个招呼吧" loading="lazy" />
+          <img className="about__vx-tag" src="assets/vx.png" alt="" aria-hidden="true" loading="lazy" />
           <button
             className="about__portrait-swap"
             type="button"
@@ -288,7 +290,7 @@ export default function App() {
       >
         {renderBackButton()}
         <div className="project-detail__images">
-          {vibeCodingImages.map((src, index) => (
+          {activeSection === "vibe-coding" && vibeCodingImages.map((src, index) => (
             <img
               src={src}
               alt={`Vibe Coding 设计系统工作台项目展示第 ${index + 1} 页`}
@@ -307,7 +309,7 @@ export default function App() {
       >
         {renderBackButton()}
         <div className="project-detail__images">
-          {voiceSocialImages.map((src, index) => (
+          {activeSection === "voice-social" && voiceSocialImages.map((src, index) => (
             <img
               src={src}
               alt={`语音房社交项目展示第 ${index + 1} 页`}
@@ -326,7 +328,7 @@ export default function App() {
       >
         {renderBackButton()}
         <div className="project-detail__images">
-          {aigcImages.map((src, index) => (
+          {activeSection === "aigc" && aigcImages.map((src, index) => (
             <img
               src={src}
               alt={`AIGC 生图探索项目展示第 ${index + 1} 页`}
@@ -345,7 +347,7 @@ export default function App() {
       >
         {renderBackButton()}
         <div className="project-detail__images">
-          {helloCarRentalImages.map((src, index) => (
+          {activeSection === "hello-car-rental" && helloCarRentalImages.map((src, index) => (
             <img
               src={src}
               alt={`哈啰租车商家端项目展示第 ${index + 1} 页`}
@@ -364,7 +366,7 @@ export default function App() {
       >
         {renderBackButton()}
         <div className="project-detail__images">
-          {dataPlatformImages.map((src, index) => (
+          {activeSection === "data-platform" && dataPlatformImages.map((src, index) => (
             <img
               src={src}
               alt={`数据开发平台项目展示第 ${index + 1} 页`}
