@@ -11,11 +11,11 @@ const projects = [
 ]
 
 const helloCarRentalImages = [
-  "assets/hello-car-rental/hello-car-rental-1.jpg",
-  "assets/hello-car-rental/hello-car-rental-1-2.jpg",
+  "assets/hello/hello-car-rental-1.jpg",
+  "assets/hello/hello-car-rental-1-2.jpg",
   ...Array.from(
     { length: 9 },
-    (_, index) => `assets/hello-car-rental/hello-car-rental-${index + 2}.jpg`,
+    (_, index) => `assets/hello/hello-car-rental-${index + 2}.jpg`,
   ),
 ]
 
