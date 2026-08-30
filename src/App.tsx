@@ -46,7 +46,18 @@ export default function App() {
   const contentsPausedRef = useRef(false)
   const [portraitActive, setPortraitActive] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
+  const [coverArtReady, setCoverArtReady] = useState(false)
   const retryPlayback = () => void videoRef.current?.play()
+
+  useEffect(() => {
+    if (activeSection !== "home") {
+      setCoverArtReady(false)
+      return
+    }
+
+    const fallbackTimer = window.setTimeout(() => setCoverArtReady(true), 1800)
+    return () => window.clearTimeout(fallbackTimer)
+  }, [activeSection])
 
   useLayoutEffect(() => {
     if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual"
@@ -195,12 +206,24 @@ export default function App() {
       </nav>
       <section className="cover" id="home" hidden={activeSection !== "home"} onPointerDown={retryPlayback}>
       {activeSection === "home" && (
-        <video ref={videoRef} className="cover__video" autoPlay muted loop playsInline preload="metadata" aria-label="作品集封面动态背景">
-          <source src="assets/cover.mp4" type="video/mp4" />
+        <video
+          ref={videoRef}
+          className="cover__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onCanPlay={() => setCoverArtReady(true)}
+          aria-label="作品集封面动态背景"
+        >
+          <source src="assets/19263af509a456a769f19d4e983d9108.mp4" type="video/mp4" />
         </video>
       )}
       <div className="cover__shade" aria-hidden="true" />
       <section className="cover__art" aria-label="王杰慧 UI/UX 设计作品集 2026">
+        {coverArtReady && (
+          <>
         <img className="cover__title" src="assets/title.png" alt="设计作品集，向新而行！" />
         <img className="cover__uiux" src="assets/uiux.png" alt="UI/UX 2026" />
         <div className="cover__sticker-entry" aria-hidden="true">
@@ -209,6 +232,8 @@ export default function App() {
         <span className="cover__signature-mask">
           <img className="cover__signature" src="assets/begin-anywhere.png" alt="Begin Anywhere" />
         </span>
+          </>
+        )}
       </section>
       <a className="cover__scroll-cue" href="#about" aria-label="查看关于我" onClick={(event) => { event.preventDefault(); setActiveSection("about") }}>
         <DepthText
