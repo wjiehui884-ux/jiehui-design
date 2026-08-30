@@ -21,7 +21,7 @@ const helloCarRentalImages = [
 
 const aigcImages = Array.from(
   { length: 6 },
-  (_, index) => `assets/aigc/aigc-${index + 1}.png`,
+  (_, index) => `assets/aigc/aigc-${index + 1}.jpg`,
 )
 
 const dataPlatformImages = Array.from(
