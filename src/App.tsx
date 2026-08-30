@@ -36,7 +36,7 @@ const voiceSocialImages = Array.from(
 
 const vibeCodingImages = Array.from(
   { length: 9 },
-  (_, index) => `assets/vibe-coding/${index + 1}.png`,
+  (_, index) => `assets/vibe%20coding/${index + 1}.jpg`,
 )
 
 export default function App() {
@@ -143,7 +143,7 @@ export default function App() {
 
     frame = requestAnimationFrame(positionCards)
     return () => cancelAnimationFrame(frame)
-  }, [])
+  }, [activeSection])
 
   const renderBackButton = () => (
     <GlassSurface
@@ -249,6 +249,7 @@ export default function App() {
       </section>
 
       <section className="contents" id="contents" hidden={activeSection !== "contents"} aria-label="作品目录">
+        {activeSection === "contents" && (
         <div className="contents__canvas">
           <img className="contents__background" src="assets/contents-base.jpg" alt="作品目录" />
           <img className="contents__rope" src="assets/contents-rope-layer.jpg" alt="" />
@@ -280,6 +281,7 @@ export default function App() {
           </div>
           <img className="contents__person" src="assets/contents-person-portrait.png" alt="" />
         </div>
+        )}
       </section>
 
       <section
@@ -378,9 +380,11 @@ export default function App() {
       </section>
 
       <footer className="portfolio-footer" id="contact" hidden={activeSection !== "contact"} aria-label="联系方式与作品集页尾">
-        <div className="portfolio-footer__canvas">
-          <img src="assets/portfolio-footer.jpg" alt="联系方式与作品集页尾" />
-        </div>
+        {activeSection === "contact" && (
+          <div className="portfolio-footer__canvas">
+            <img src="assets/portfolio-footer.jpg" alt="联系方式与作品集页尾" />
+          </div>
+        )}
       </footer>
     </main>
   )
